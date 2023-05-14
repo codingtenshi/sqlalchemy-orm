@@ -11,7 +11,7 @@ def create_fake_users(count=10):
             email=fake.email(),
         )
         for _ in range(count)
-        ]
+    ]
 
 
 def main():
@@ -19,3 +19,7 @@ def main():
     users = create_fake_users()
     session.add_all(users)
     session.commit()
+
+
+if __name__ == '__main__':
+    main()

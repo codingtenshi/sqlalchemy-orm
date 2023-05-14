@@ -1,29 +1,25 @@
 import datetime
 
-from sqlalchemy import Column, Integer, String, create_engine, DateTime
+from sqlalchemy import Column, String, Integer, create_engine, DateTime, Float
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 engine = create_engine(
     "mysql+pymysql://root:root@localhost:3306/company"
-
 )
 Session = sessionmaker(bind=engine)
 Base = declarative_base(bind=engine)
 
 
-def main():
-    session = Session()
-
-
 class User(Base):
-    __tablename__ = 'users'
+    __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
     email = Column(String(50), nullable=False, unique=True)
 
+    salary = Column(Float, default=0, nullable=False)
     creation_date = Column(
         DateTime,
         default=datetime.datetime.now,
@@ -35,7 +31,3 @@ class User(Base):
 
 
 Base.metadata.create_all()
-
-
-
-
